@@ -1,0 +1,91 @@
+<div class="container">
+    <div class="col-md-12">
+        <h1>Funcionários</h1>
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+            <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">Nome</th>
+                <th class="text-center">Função</th>
+                <th class="text-center">Empresa</th>
+                <th class="text-center">&nbsp;</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let employee of employees">
+                <td>{{ employee.id }}</td>
+                <td>{{ employee.name }}</td>
+                <td>{{ employee.role }}</td>
+                <td>{{ employee.company }}</td>
+                <td>
+                    <button class="btn btn-info"
+                            (click)="showEditEmployeeForm(employee)">
+                        <i class="fa fa-edit"></i>
+                    </button>
+                    <button class="btn btn-danger"
+                            (click)="removeEmployee(employee)">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <button class="btn btn-success"
+                (click)="showAddEmployeeForm()"><i class="fa fa-plus"></i></button>
+        <br/>
+        <br/>
+
+        <form *ngIf="employeeForm">
+            <h2>Add New Employee</h2>
+            <p>ID: <input type="text"
+                          name="id"
+                          [(ngModel)]="newEmployee.id"/></p>
+            <p>Name: <input type="text"
+                            name="name"
+                            [(ngModel)]="newEmployee.name"/></p>
+            <p>Função: <input type="text"
+                              name="role"
+                              [(ngModel)]="newEmployee.role"/></p>
+            <p>Empresa: <input type="text"
+                               name="company"
+                               [(ngModel)]="newEmployee.company"/></p>
+            <p>
+                <button type="button"
+                        class="btn btn-primary"
+                        (click)="saveEmployee(newEmployee)">Enviar
+                </button>
+                <button type="button"
+                        class="btn btn-warning"
+                        (click)="cancelNewEmployee()">Cancelar
+                </button>
+            </p>
+        </form>
+
+        <form *ngIf="editEmployeeForm">
+            <h2>Editar Funcionário</h2>
+            <p>ID: <input type="text"
+                          name="id"
+                          [(ngModel)]="editedEmployee.id"/></p>
+            <p>Nome: <input type="text"
+                            name="name"
+                            [(ngModel)]="editedEmployee.name"/></p>
+            <p>Função: <input type="text"
+                              name="role"
+                              [(ngModel)]="editedEmployee.role"/></p>
+            <p>Price: <input type="text"
+                             name="company"
+                             [(ngModel)]="editedEmployee.company"/></p>
+            <p>
+                <button type="button"
+                        class="btn btn-primary"
+                        (click)="updateEmployee(editedEmployee)">Enviar
+                </button>
+                <button type="button"
+                        class="btn btn-warning"
+                        (click)="cancelEdits()">Cancelar
+                </button>
+            </p>
+        </form>
+    </div>
+</div>

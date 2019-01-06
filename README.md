@@ -1,4 +1,4 @@
-## CRUD Example Project  -  FINISHED
+## Halliburton
 
 ### Running the Project
 1) Open a command prompt in the project's root directory
@@ -12,8 +12,3 @@
 ### Using
 ` SystemJS `
 ` Angular 4.0 `
-
-### Features
-- navbar
-- routing setup
-- app.template  -> loads navbar and **RouterOutlet** for **Home Component**
