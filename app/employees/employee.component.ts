@@ -78,4 +78,8 @@ export class EmployeeComponent implements OnInit {
         this.filteredEmployees = this._employeeService.filterEmployees(employeeFilter)
     }
 
+    clearFilter(){
+	    this.filter = { name:"", role:"", company:"", boardDate:""};
+    }
+
 }
