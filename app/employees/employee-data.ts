@@ -12,13 +12,13 @@ export const EMPLOYEES: Employee[] = [{
     name: 'Beltrano',
     role: 'Operador',
     company: 'Halliburton',
-    boardDate: new Date(2019,1,1),
-    landDate: new Date(2019,2,1)
+    boardDate: new Date(2019,5,30),
+    landDate: new Date(2019,10,15)
 }, {
     id: 3,
     name: 'Ciclano',
     role: 'Piloto',
     company: 'Halliburton',
-    boardDate: new Date(2019,1,1),
-    landDate: new Date(2019,2,1)
+    boardDate: new Date(2019,3,1),
+    landDate: new Date(2019,4,1)
 }]

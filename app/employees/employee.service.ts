@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {Employee} from './employee';
 import {EMPLOYEES} from './employee-data';
 import {findIndex} from 'lodash';
-import {on} from "cluster";
 
 @Injectable()
 export class EmployeeService {
@@ -14,6 +13,8 @@ export class EmployeeService {
     }
 
     addEmployee(employee: Employee) {
+        employee.boardDate = EmployeeService.parseDate(employee.boardDate);
+        employee.landDate = EmployeeService.parseDate(employee.landDate);
         this.employees.push(employee);
     }
 
@@ -21,6 +22,8 @@ export class EmployeeService {
         let index = findIndex(this.employees, (p: Employee) => {
             return p.id === employee.id;
         });
+        employee.boardDate = EmployeeService.parseDate(employee.boardDate);
+        employee.landDate = EmployeeService.parseDate(employee.landDate);
         this.employees[index] = employee;
     }
 
@@ -29,37 +32,48 @@ export class EmployeeService {
     }
 
     filterEmployees(employeeFilter: Employee) {
-        if (employeeFilter.name == "" && employeeFilter.role == "" && employeeFilter.company == ""){
+        if (employeeFilter.name == "" && employeeFilter.role == "" && employeeFilter.company == "" && !employeeFilter.boardDate){
             return this.employees;
         }
 
-        this.filteredEmployees = [];
+        employeeFilter.boardDate = EmployeeService.parseDate(employeeFilter.boardDate);
 
-        console.log(employeeFilter);
+        this.filteredEmployees = [];
 
         for(let employee of this.employees){
 
-            if (employeeFilter.name != ""){
+            if (employee.name && employeeFilter.name){
                 if (employee.name.toLowerCase().indexOf(employeeFilter.name.toLowerCase()) > -1){
                     this.filteredEmployees.push(employee);
                     continue;
                 }
             }
 
-            if (employeeFilter.role != ""){
+            if (employee.role && employeeFilter.role){
                 if (employee.role.toLowerCase().indexOf(employeeFilter.role.toLowerCase()) > -1){
                     this.filteredEmployees.push(employee);
                     continue;
                 }
             }
 
-            if (employeeFilter.company != ""){
+            if (employee.company && employeeFilter.company){
                 if (employee.company.toLowerCase().indexOf(employeeFilter.company.toLowerCase()) > -1){
+                    this.filteredEmployees.push(employee);
+                }
+            }
+
+            if (employee.boardDate && employeeFilter.boardDate) {
+                if (employeeFilter.boardDate.getDate() == employee.boardDate.getDate()) {
                     this.filteredEmployees.push(employee);
                 }
             }
         }
 
         return this.filteredEmployees;
+    }
+
+    static parseDate(value : any){
+        if(value == "") return null;
+        return new Date(value);
     }
 }

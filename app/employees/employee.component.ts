@@ -16,7 +16,7 @@ export class EmployeeComponent implements OnInit {
     isNewForm: boolean;
     newEmployee: any = {};
     editedEmployee: any = {};
-    filter: any = { name:"", role:"", company:""};
+    filter: any = { name:"", role:"", company:"", boardDate:""};
 
     constructor(private _employeeService: EmployeeService) {
     }
@@ -49,7 +49,6 @@ export class EmployeeComponent implements OnInit {
 
     saveEmployee(employee: Employee) {
         if (this.isNewForm) {
-            // add a new employee
             this._employeeService.addEmployee(employee);
         }
         this.employeeForm = false;

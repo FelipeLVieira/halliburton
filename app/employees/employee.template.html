@@ -7,15 +7,23 @@
         <br>
         <!--Search Employee-->
         <h4>Filtro</h4>
-        <p>Nome: <input type="text"
+        <p>Nome:</p>
+        <p><input type="text"
                name="nameFilter"
                [(ngModel)]="filter.name"/></p>
-        <p>Função: <input type="text"
+        <p>Função:</p>
+        <p><input type="text"
                name="roleFilter"
                [(ngModel)]="filter.role"/></p>
-        <p>Empresa: <input type="text"
+        <p>Empresa:</p>
+        <p><input type="text"
                name="companyFilter"
                [(ngModel)]="filter.company"/></p>
+        <p>Data de Embarque</p>
+        <p>(Ex.: 05/30/2019 ou Sat Jun 30 2019):</p>
+        <p><input type="text"
+               name="boardDateFilter"
+               [(ngModel)]="filter.boardDate"/></p>
         <br>
         <p>
             <button type="button"
