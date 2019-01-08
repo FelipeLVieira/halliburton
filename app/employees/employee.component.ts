@@ -10,11 +10,13 @@ import {clone} from 'lodash';
 
 export class EmployeeComponent implements OnInit {
     employees: Employee[];
+    filteredEmployees: Employee[];
     employeeForm: boolean = false;
     editEmployeeForm: boolean = false;
     isNewForm: boolean;
     newEmployee: any = {};
     editedEmployee: any = {};
+    filter: any = { name:"", role:"", company:""};
 
     constructor(private _employeeService: EmployeeService) {
     }
@@ -25,6 +27,7 @@ export class EmployeeComponent implements OnInit {
 
     getEmployees() {
         this.employees = this._employeeService.getEmployeesFromData();
+        this.filteredEmployees = this._employeeService.getEmployeesFromData();
     }
 
     showEditEmployeeForm(employee: Employee) {
@@ -70,6 +73,10 @@ export class EmployeeComponent implements OnInit {
     cancelEdits() {
         this.editedEmployee = {};
         this.editEmployeeForm = false;
+    }
+
+    filterEmployees(employeeFilter : Employee){
+        this.filteredEmployees = this._employeeService.filterEmployees(employeeFilter)
     }
 
 }

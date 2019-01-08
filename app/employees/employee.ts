@@ -3,4 +3,6 @@ export interface Employee {
     name: string;
     role: string;
     company: string;
+    boardDate: Date;
+    landDate: Date;
 }

@@ -1,6 +1,31 @@
 <div class="container">
     <div class="col-md-12">
         <h1>Funcionários</h1>
+        <div>
+            <p>Total de funcionários: {{employees.length}}</p>
+        </div>
+        <br>
+        <!--Search Employee-->
+        <h4>Filtro</h4>
+        <p>Nome: <input type="text"
+               name="nameFilter"
+               [(ngModel)]="filter.name"/></p>
+        <p>Função: <input type="text"
+               name="roleFilter"
+               [(ngModel)]="filter.role"/></p>
+        <p>Empresa: <input type="text"
+               name="companyFilter"
+               [(ngModel)]="filter.company"/></p>
+        <br>
+        <p>
+            <button type="button"
+                   class="btn btn-primary"
+                   (click)="filterEmployees(filter)">Filtrar
+            </button>
+        </p>
+        <br>
+        <h4>Funcionários</h4>
+        <!--List Employee-->
         <table class="table table-bordered table-striped table-hover">
             <thead>
             <tr>
@@ -8,15 +33,21 @@
                 <th class="text-center">Nome</th>
                 <th class="text-center">Função</th>
                 <th class="text-center">Empresa</th>
+                <!--<th class="text-center">Status</th>-->
+                <th class="text-center">Data de Embarque</th>
+                <th class="text-center">Data de Desembarque</th>
                 <th class="text-center">&nbsp;</th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let employee of employees">
+            <tr *ngFor="let employee of filteredEmployees">
                 <td>{{ employee.id }}</td>
                 <td>{{ employee.name }}</td>
                 <td>{{ employee.role }}</td>
                 <td>{{ employee.company }}</td>
+                <!--<td>{{  }}</td>-->
+                <td>{{ employee.boardDate }}</td>
+                <td>{{ employee.landDate }}</td>
                 <td>
                     <button class="btn btn-info"
                             (click)="showEditEmployeeForm(employee)">
@@ -36,12 +67,13 @@
         <br/>
         <br/>
 
+        <!--Add Employee-->
         <form *ngIf="employeeForm">
-            <h2>Add New Employee</h2>
+            <h2>Adicionar novo funcionário</h2>
             <p>ID: <input type="text"
                           name="id"
                           [(ngModel)]="newEmployee.id"/></p>
-            <p>Name: <input type="text"
+            <p>Nome: <input type="text"
                             name="name"
                             [(ngModel)]="newEmployee.name"/></p>
             <p>Função: <input type="text"
@@ -50,6 +82,14 @@
             <p>Empresa: <input type="text"
                                name="company"
                                [(ngModel)]="newEmployee.company"/></p>
+            <p>Data de Embarque: <input type="text"
+                               name="boardDate"
+
+                               [(ngModel)]="newEmployee.boardDate"/></p>
+
+            <p>Data de Desembarque: <input type="text"
+                               name="landDate"
+                               [(ngModel)]="newEmployee.landDate"/></p>
             <p>
                 <button type="button"
                         class="btn btn-primary"
@@ -62,8 +102,9 @@
             </p>
         </form>
 
+        <!--Edit Employee-->
         <form *ngIf="editEmployeeForm">
-            <h2>Editar Funcionário</h2>
+            <h2>Editar funcionário</h2>
             <p>ID: <input type="text"
                           name="id"
                           [(ngModel)]="editedEmployee.id"/></p>
@@ -73,9 +114,15 @@
             <p>Função: <input type="text"
                               name="role"
                               [(ngModel)]="editedEmployee.role"/></p>
-            <p>Price: <input type="text"
+            <p>Empresa: <input type="text"
                              name="company"
                              [(ngModel)]="editedEmployee.company"/></p>
+            <p>Data de Embarque: <input type="text"
+                               name="boardDate"
+                               [(ngModel)]="editedEmployee.boardDate"/></p>
+            <p>Data de Desembarque: <input type="text"
+                               name="landDate"
+                               [(ngModel)]="editedEmployee.landDate"/></p>
             <p>
                 <button type="button"
                         class="btn btn-primary"

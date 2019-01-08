@@ -4,15 +4,21 @@ export const EMPLOYEES: Employee[] = [{
     id: 1,
     name: 'Fulano',
     role: 'Soldador',
-    company: 'Petrobras'
+    company: 'Petrobras',
+    boardDate: new Date(2019,1,1),
+    landDate: new Date(2019,2,1)
 }, {
     id: 2,
     name: 'Beltrano',
     role: 'Operador',
-    company: 'Halliburton'
+    company: 'Halliburton',
+    boardDate: new Date(2019,1,1),
+    landDate: new Date(2019,2,1)
 }, {
     id: 3,
     name: 'Ciclano',
     role: 'Piloto',
-    company: 'Halliburton'
+    company: 'Halliburton',
+    boardDate: new Date(2019,1,1),
+    landDate: new Date(2019,2,1)
 }]
