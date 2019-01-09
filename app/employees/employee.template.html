@@ -4,38 +4,117 @@
         <div>
             <p>Total de funcionários: {{employees.length}}</p>
         </div>
-        <br>
+
         <!--Search Employee-->
-        <h4>Filtro</h4>
+        <h2>Busca</h2>
         <p>Nome:</p>
         <p><input type="text"
-               name="nameFilter"
-               [(ngModel)]="filter.name"/></p>
+                  name="nameFilter"
+                  [(ngModel)]="filter.name"/></p>
         <p>Função:</p>
         <p><input type="text"
-               name="roleFilter"
-               [(ngModel)]="filter.role"/></p>
+                  name="roleFilter"
+                  [(ngModel)]="filter.role"/></p>
         <p>Empresa:</p>
         <p><input type="text"
-               name="companyFilter"
-               [(ngModel)]="filter.company"/></p>
+                  name="companyFilter"
+                  [(ngModel)]="filter.company"/></p>
         <p>Data de Embarque</p>
         <p>(Ex.: 05/30/2019 ou Sat Jun 30 2019):</p>
         <p><input type="text"
-               name="boardDateFilter"
-               [(ngModel)]="filter.boardDate"/></p>
+                  name="boardDateFilter"
+                  [(ngModel)]="filter.boardDate"/></p>
         <br>
         <p>
             <button type="button"
-                   class="btn btn-primary"
-                   (click)="filterEmployees(filter)">Filtrar
+                    class="btn btn-primary"
+                    (click)="filterEmployees(filter)">Filtrar
             </button>
-	        <button type="button"
-	                class="btn btn-default"
-	                (click)="clearFilter()">Limpar
-	        </button>
+            <button type="button"
+                    class="btn btn-default"
+                    (click)="clearFilter()">Limpar
+            </button>
         </p>
-        <br>
+
+        <br/>
+
+        <!--Add Employee-->
+        <form *ngIf="employeeForm">
+            <br/>
+            <h2>Adicionar novo funcionário</h2>
+            <p>ID: <input type="text"
+                          name="id"
+                          [(ngModel)]="newEmployee.id"/></p>
+            <p>Nome: <input type="text"
+                            name="name"
+                            [(ngModel)]="newEmployee.name"/></p>
+            <p>Função: <input type="text"
+                              name="role"
+                              [(ngModel)]="newEmployee.role"/></p>
+            <p>Empresa: <input type="text"
+                               name="company"
+                               [(ngModel)]="newEmployee.company"/></p>
+            <p>Data de Embarque: <input type="text"
+                                        name="boardDate"
+
+                                        [(ngModel)]="newEmployee.boardDate"/></p>
+
+            <p>Data de Desembarque: <input type="text"
+                                           name="landDate"
+                                           [(ngModel)]="newEmployee.landDate"/></p>
+            <p>
+                <button type="button"
+                        class="btn btn-primary"
+                        (click)="saveEmployee(newEmployee)">Enviar
+                </button>
+                <button type="button"
+                        class="btn btn-warning"
+                        (click)="cancelNewEmployee()">Cancelar
+                </button>
+            </p>
+        </form>
+
+        <!--Edit Employee-->
+        <form *ngIf="editEmployeeForm">
+            <br/>
+            <h2>Editar funcionário</h2>
+            <p>ID: <input type="text"
+                          name="id"
+                          [(ngModel)]="editedEmployee.id"/></p>
+            <p>Nome: <input type="text"
+                            name="name"
+                            [(ngModel)]="editedEmployee.name"/></p>
+            <p>Função: <input type="text"
+                              name="role"
+                              [(ngModel)]="editedEmployee.role"/></p>
+            <p>Empresa: <input type="text"
+                               name="company"
+                               [(ngModel)]="editedEmployee.company"/></p>
+            <p>Data de Embarque: <input type="text"
+                                        name="boardDate"
+                                        [(ngModel)]="editedEmployee.boardDate"/></p>
+            <p>Data de Desembarque: <input type="text"
+                                           name="landDate"
+                                           [(ngModel)]="editedEmployee.landDate"/></p>
+            <p>
+                <button type="button"
+                        class="btn btn-primary"
+                        (click)="updateEmployee(editedEmployee)">Enviar
+                </button>
+                <button type="button"
+                        class="btn btn-warning"
+                        (click)="cancelEdits()">Cancelar
+                </button>
+            </p>
+        </form>
+
+        <br/>
+
+        <button class="btn btn-success"
+                (click)="showAddEmployeeForm()"><i class="fa fa-plus"></i> Adicionar </button>
+
+        <br/>
+
         <h4>Funcionários</h4>
         <!--List Employee-->
         <table class="table table-bordered table-striped table-hover">
@@ -63,88 +142,17 @@
                 <td>
                     <button class="btn btn-info"
                             (click)="showEditEmployeeForm(employee)">
-                        <i class="fa fa-edit"></i>
+                        <i class="fa fa-edit"> Editar </i>
                     </button>
                     <button class="btn btn-danger"
                             (click)="removeEmployee(employee)">
-                        <i class="fa fa-minus"></i>
+                        <i class="fa fa-minus"> Remover </i>
                     </button>
                 </td>
             </tr>
             </tbody>
         </table>
-
-        <button class="btn btn-success"
-                (click)="showAddEmployeeForm()"><i class="fa fa-plus"></i></button>
         <br/>
         <br/>
-
-        <!--Add Employee-->
-        <form *ngIf="employeeForm">
-            <h2>Adicionar novo funcionário</h2>
-            <p>ID: <input type="text"
-                          name="id"
-                          [(ngModel)]="newEmployee.id"/></p>
-            <p>Nome: <input type="text"
-                            name="name"
-                            [(ngModel)]="newEmployee.name"/></p>
-            <p>Função: <input type="text"
-                              name="role"
-                              [(ngModel)]="newEmployee.role"/></p>
-            <p>Empresa: <input type="text"
-                               name="company"
-                               [(ngModel)]="newEmployee.company"/></p>
-            <p>Data de Embarque: <input type="text"
-                               name="boardDate"
-
-                               [(ngModel)]="newEmployee.boardDate"/></p>
-
-            <p>Data de Desembarque: <input type="text"
-                               name="landDate"
-                               [(ngModel)]="newEmployee.landDate"/></p>
-            <p>
-                <button type="button"
-                        class="btn btn-primary"
-                        (click)="saveEmployee(newEmployee)">Enviar
-                </button>
-                <button type="button"
-                        class="btn btn-warning"
-                        (click)="cancelNewEmployee()">Cancelar
-                </button>
-            </p>
-        </form>
-
-        <!--Edit Employee-->
-        <form *ngIf="editEmployeeForm">
-            <h2>Editar funcionário</h2>
-            <p>ID: <input type="text"
-                          name="id"
-                          [(ngModel)]="editedEmployee.id"/></p>
-            <p>Nome: <input type="text"
-                            name="name"
-                            [(ngModel)]="editedEmployee.name"/></p>
-            <p>Função: <input type="text"
-                              name="role"
-                              [(ngModel)]="editedEmployee.role"/></p>
-            <p>Empresa: <input type="text"
-                             name="company"
-                             [(ngModel)]="editedEmployee.company"/></p>
-            <p>Data de Embarque: <input type="text"
-                               name="boardDate"
-                               [(ngModel)]="editedEmployee.boardDate"/></p>
-            <p>Data de Desembarque: <input type="text"
-                               name="landDate"
-                               [(ngModel)]="editedEmployee.landDate"/></p>
-            <p>
-                <button type="button"
-                        class="btn btn-primary"
-                        (click)="updateEmployee(editedEmployee)">Enviar
-                </button>
-                <button type="button"
-                        class="btn btn-warning"
-                        (click)="cancelEdits()">Cancelar
-                </button>
-            </p>
-        </form>
     </div>
 </div>
